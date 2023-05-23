@@ -1,0 +1,50 @@
+h1 {
+    text-align: center;
+}
+
+.form {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-primary {
+    margin: 4px;
+}
+
+.input {
+    max-width: 900px;
+    width: 50%;
+}
+
+.list-group {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.list-item {
+    list-style-type: none;
+    border: 1px blue solid;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    /* margin-left: 20px; */
+    max-width: 2000px;
+    width: 65%;
+}
+
+.list-item-yes {
+    list-style-type: none;
+    background-color: beige;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    max-width: 1500px;
+    width: 65%;
+}
+
+.btn-danger {
+    margin: 4px;
+}
