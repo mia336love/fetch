@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do 3</title>
-    <script src="main.js" defer></script>
+    <script type="module" src="main.js" defer></script>
+    <!-- <script type="module" src="post.js" defer></script> -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -25,56 +26,5 @@
         <ul class="tasksList"></ul>
       </div>
     </div>
-
-    <script>
-      fetch("http://localhost:3000/api/todos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "make dinner",
-          owner: 163,
-          done: false,
-        }),
-      })
-        .then((response) => {
-          return response.json();
-          console.log(response);
-        })
-        .then((data) => {
-          let obj = {
-            id: data.id,
-            name: data.name,
-            done: data.done,
-          };
-
-          array.push(obj);
-          console.log(array);
-
-          let display = `
-            <li id="${obj.id}" class="taskList">
-                <span class="spanTitle">${obj.name}</span>
-                    <div class="taskButtons">
-                        <button class="doneBtn" data-action="done">&#10004</button>
-                        <button class="deleteBtn" data-action="delete">&#10008</button>
-                    </div>
-            </li>
-        `;
-          taskList.insertAdjacentHTML("beforeend", display);
-        })
-        .catch((error) => console.log(error));
-
-      fetch("http://localhost:3000/api/todos/{id}", {
-        method: "GET",
-        headers: {
-          "Contend-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          return response.json;
-        })
-        .then((data) => console.log(data));
-    </script>
   </body>
 </html>

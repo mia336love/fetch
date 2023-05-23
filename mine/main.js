@@ -1,3 +1,5 @@
+import { post } from "./post.js";
+
 let inp = document.querySelector(".inp");
 let btn = document.querySelector(".btn");
 let taskList = document.createElement("ul");
@@ -5,19 +7,15 @@ let taskList = document.createElement("ul");
 document.body.append(taskList);
 
 let array = [
-  // {
-  //   name: "do homework",
-  //   done: false,
-  // },
-  // {
-  //   name: "buy milk",
-  //   done: false,
-  // },
+  {
+    name: "do homework",
+    done: false,
+  },
+  {
+    name: "buy milk",
+    done: false,
+  },
 ];
-
-// if (localStorage.getItem("todo-3")) {
-//   array = JSON.parse(localStorage.getItem("todo-3"));
-// }
 
 // размещение LS на странице (обновление стр)
 array.forEach(function (task) {
@@ -34,35 +32,46 @@ array.forEach(function (task) {
   taskList.insertAdjacentHTML("beforeend", display);
 });
 
+// function addTask() {
+//   if (inp.value !== "") {
+//     let task = inp.value;
+//     randomValue = Math.round(
+//       Math.random() * (Math.max(9999, 1) - Math.min(9999, 1)) +
+//         Math.min(9999, 1)
+//     );
+
+//     let obj = {
+//       name: inp.value,
+//       owner: "todo",
+//       done: false,
+//     };
+
+//     array.push(obj);
+//     console.log(array);
+//     console.log(obj);
+//     saveToLK();
+
+//     let display = `
+//       <li id="${obj.id}" class="taskList">
+//             <span class="spanTitle">${obj.name}</span>
+//               <div class="taskButtons">
+//                 <button class="doneBtn" data-action="done">&#10004</button>
+//                 <button class="deleteBtn" data-action="delete">&#10008</button>
+//               </div>
+//         </li>
+//     `;
+//     taskList.insertAdjacentHTML("beforeend", display);
+
+//     inp.value = "";
+//     inp.focus();
+//   } else {
+//     alert("Введите задачу");
+//   }
+// }
+
 function addTask() {
   if (inp.value !== "") {
-    // let task = inp.value;
-    randomValue = Math.round(
-      Math.random() * (Math.max(9999, 1) - Math.min(9999, 1)) +
-        Math.min(9999, 1)
-    );
-    let obj = {
-      id: randomValue,
-      name: inp.value,
-      done: false,
-    };
-
-    array.push(obj);
-    // console.log(array);
-    // console.log(obj);
-    // saveToLK();
-
-    let display = `
-    <li id="${obj.id}" class="taskList">
-          <span class="spanTitle">${obj.name}</span>
-            <div class="taskButtons">
-              <button class="doneBtn" data-action="done">&#10004</button>
-              <button class="deleteBtn" data-action="delete">&#10008</button>
-            </div>
-      </li>
-  `;
-    taskList.insertAdjacentHTML("beforeend", display);
-
+    post(inp, array, taskList); // отправить задачу на сервер
     inp.value = "";
     inp.focus();
   } else {
@@ -130,7 +139,3 @@ function deleteTask(event) {
   //   saveToLK();
 }
 taskList.addEventListener("click", deleteTask);
-
-// function saveToLK() {
-//   localStorage.setItem("todo-3", JSON.stringify(array));
-// }
