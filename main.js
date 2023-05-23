@@ -48,7 +48,7 @@ function addTask() {
     };
 
     array.push(obj);
-    console.log(array);
+    // console.log(array);
     // console.log(obj);
     // saveToLK();
 
