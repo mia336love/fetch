@@ -1,5 +1,3 @@
-import { post } from "./post.js";
-
 let inp = document.querySelector(".inp");
 let btn = document.querySelector(".btn");
 let taskList = document.createElement("ul");
@@ -32,46 +30,34 @@ array.forEach(function (task) {
   taskList.insertAdjacentHTML("beforeend", display);
 });
 
-// function addTask() {
-//   if (inp.value !== "") {
-//     let task = inp.value;
-//     randomValue = Math.round(
-//       Math.random() * (Math.max(9999, 1) - Math.min(9999, 1)) +
-//         Math.min(9999, 1)
-//     );
-
-//     let obj = {
-//       name: inp.value,
-//       owner: "todo",
-//       done: false,
-//     };
-
-//     array.push(obj);
-//     console.log(array);
-//     console.log(obj);
-//     saveToLK();
-
-//     let display = `
-//       <li id="${obj.id}" class="taskList">
-//             <span class="spanTitle">${obj.name}</span>
-//               <div class="taskButtons">
-//                 <button class="doneBtn" data-action="done">&#10004</button>
-//                 <button class="deleteBtn" data-action="delete">&#10008</button>
-//               </div>
-//         </li>
-//     `;
-//     taskList.insertAdjacentHTML("beforeend", display);
-
-//     inp.value = "";
-//     inp.focus();
-//   } else {
-//     alert("Введите задачу");
-//   }
-// }
-
 function addTask() {
   if (inp.value !== "") {
-    post(inp, array, taskList); // отправить задачу на сервер
+    // let task = inp.value;
+    // randomValue = Math.round(
+    //   Math.random() * (Math.max(9999, 1) - Math.min(9999, 1)) +
+    //     Math.min(9999, 1)
+    // );
+    let obj = {
+      // id: randomValue,
+      name: inp.value,
+      done: false,
+    };
+
+    array.push(obj);
+    console.log(array);
+    // console.log(obj);
+
+    let display = `
+    <li id="${obj.id}" class="taskList">
+          <span class="spanTitle">${obj.name}</span>
+            <div class="taskButtons">
+              <button class="doneBtn" data-action="done">&#10004</button>
+              <button class="deleteBtn" data-action="delete">&#10008</button>
+            </div>
+      </li>
+  `;
+    taskList.insertAdjacentHTML("beforeend", display);
+
     inp.value = "";
     inp.focus();
   } else {
@@ -87,10 +73,6 @@ inp.addEventListener("keyup", function (event) {
   }
 });
 
-// function doneTask() {
-// let text = document
-// }
-// let done = false;
 function doneTask(event) {
   if (event.target.dataset.action === "done") {
     const parentNode = event.target.closest("li");
@@ -104,19 +86,12 @@ function doneTask(event) {
       }
     });
     task.done = !task.done;
-    // saveToLK();
-    // console.log(task);
-
-    // localStorage.setItem("todo", JSON.stringify(array));
   }
 }
-
-// saveToLK();
 
 taskList.addEventListener("click", doneTask);
 
 // delete button
-
 // use findIndex
 function deleteTask(event) {
   if (event.target.dataset.action === "delete") {
@@ -136,6 +111,5 @@ function deleteTask(event) {
       array.splice(index, 1);
     }
   }
-  //   saveToLK();
 }
 taskList.addEventListener("click", deleteTask);
