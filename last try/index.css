@@ -17,13 +17,13 @@ h1 {
   width: 50%;
 }
 
-.list-group {
+.list-group-item {
   display: flex;
   align-items: center;
   margin: 5px;
 }
 
-.list-item {
+.list-group-item {
   list-style-type: none;
   border: 1px blue solid;
   background-color: aliceblue;
@@ -47,4 +47,15 @@ h1 {
 
 .btn-danger {
   margin: 4px;
+}
+
+/* .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+.list-group-item-success {
+  text-decoration: line-through;
+  color: #b8b8b8;
 }
