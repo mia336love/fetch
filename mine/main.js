@@ -1,3 +1,5 @@
+import { post } from "./post.js";
+
 let inp = document.querySelector(".inp");
 let btn = document.querySelector(".btn");
 let taskList = document.createElement("ul");
@@ -32,38 +34,100 @@ array.forEach(function (task) {
 
 function addTask() {
   if (inp.value !== "") {
-    // let task = inp.value;
-    // randomValue = Math.round(
-    //   Math.random() * (Math.max(9999, 1) - Math.min(9999, 1)) +
-    //     Math.min(9999, 1)
-    // );
-    let obj = {
-      // id: randomValue,
-      name: inp.value,
-      done: false,
-    };
+    fetch("http://localhost:3000/api/todos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: inp.value,
+        owner: "todo",
+        done: false,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let obj = {
+          name: data.name,
+          owner: data.owner,
+          done: data.done,
+        };
 
-    array.push(obj);
-    console.log(array);
-    // console.log(obj);
+        array.push(obj);
+        console.log(array);
 
-    let display = `
+        let display = `
     <li id="${obj.id}" class="taskList">
-          <span class="spanTitle">${obj.name}</span>
-            <div class="taskButtons">
-              <button class="doneBtn" data-action="done">&#10004</button>
-              <button class="deleteBtn" data-action="delete">&#10008</button>
-            </div>
-      </li>
+        <span class="spanTitle">${obj.name}</span>
+        <div class="taskButtons">
+            <button class="doneBtn" data-action="done">&#10004</button>
+            <button class="deleteBtn" data-action="delete">&#10008</button>
+        </div>
+    </li>
   `;
-    taskList.insertAdjacentHTML("beforeend", display);
+        taskList.insertAdjacentHTML("beforeend", display);
 
-    inp.value = "";
-    inp.focus();
+        inp.value = "";
+        inp.focus();
+      })
+      // .then((data) => {
+      //   let obj = {
+      //     id: data.id,
+      //     name: data.name,
+      //     done: data.done,
+      //   };
+
+      //   array.push(obj);
+      //   console.log(array);
+
+      //   let display = `
+      //       <li id="${obj.id}" class="taskList">
+      //           <span class="spanTitle">${obj.name}</span>
+      //               <div class="taskButtons">
+      //                   <button class="doneBtn" data-action="done">&#10004</button>
+      //                   <button class="deleteBtn" data-action="delete">&#10008</button>
+      //               </div>
+      //       </li>
+      //   `;
+      //   taskList.insertAdjacentHTML("beforeend", display);
+      // })
+      .catch((error) => console.log(error));
   } else {
     alert("Введите задачу");
   }
 }
+
+// function addTask() {
+//   if (inp.value !== "") {
+//     let obj = {
+//       name: inp.value,
+//       owner: "todo",
+//       done: false,
+//     };
+//     post(obj)
+//       .then((data) => {
+//         console.log(data);
+//         array.push(data);
+//         let display = `
+//           <li id="${data.id}" class="taskList">
+//             <span class="spanTitle">${data.name}</span>
+//             <div class="taskButtons">
+//               <button class="doneBtn" data-action="done">&#10004</button>
+//               <button class="deleteBtn" data-action="delete">&#10008</button>
+//             </div>
+//           </li>
+//         `;
+//         taskList.insertAdjacentHTML("beforeend", display);
+//         inp.value = "";
+//         inp.focus();
+//       })
+//       .catch((error) => console.error(error));
+//   } else {
+//     alert("Введите задачу");
+//   }
+// }
 btn.addEventListener("click", addTask);
 
 // enter
